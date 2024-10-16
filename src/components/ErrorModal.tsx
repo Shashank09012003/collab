@@ -1,0 +1,53 @@
+import { Button } from "@/components/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/card"
+import Image from "next/image"
+import { X } from "lucide-react"
+import Link from "next/link"
+
+interface ErrorModalProps {
+  isOpen: boolean
+  onClose: () => void
+}
+
+export default function ErrorModal({ isOpen, onClose }: ErrorModalProps = { isOpen: false, onClose: () => {} }) {
+  if (!isOpen) return null
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+      <Card className="w-full max-w-md">
+        <CardHeader className="flex flex-row items-center justify-between">
+          <div className="flex items-center space-x-2">
+            <Image
+              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAABIFBMVEX///8kHV71wkkkHV32w0n1wUT1wUsAAGD1wED//vz1wUP3w0IKAFEVDFbZ1OMWDGEeF1q+vMpCN2/1vzpSSXr++Ov2xVH1vjX++/P30Hn/zz/3y2T++vD87MsAAE0cFVj99OH404EZFV765LT53J7757352pb88NX514z/2TP/zkD/1Dj3zG32yFv75rr7ykP64aoMCGETD19KNmAtJ2M8MGxdSVuwqsD98tvZtkKQcVesh1mJaFyvkU3wxzvfvD11XF6VeVY+MF/MrEG9mk3swjxxVF/EpEejiE5lSl9LO17Op0p7YlaIblaVfFHjtkdyX1jp5vB0bpWQiqi9usvTzt7Ink/NoE1/eZpcVYCfmrOEZFxaQl9iT1y0sMOxiFD/yGLfAAAYX0lEQVR4nO1di1/TyBY2yeRBW2zW2BZaCiUiBdJSWllEVwEF1GXVXdfdvavXvff//y9uMjPnMaU8moJ6f7+cQp95nMd3vnNmkqZ37hRSSCGFFFJIIYUUUkghhRRSSCGFFFJIIYUUUkghhRRSSCGFFFJIIYUUUkghhYB0xPq3VuFSWSt1ZtxCK+jN3YQmtyW9oD/bBjoN97u2cK7nNjozbaEbua2Fm1HmViS1MGrPtIWHqYVLN6TNbchCy40ezrSFB4Hdr92QNrchS303eDDTFnYCUf+eLazVRbA20xbWAyE6N6PMrUinLkobs2xgbrUk3P2bUucWpCOEuzgL2adUJYLv2cL9spiN7Bf6tj0jG9+udCMh+rNYuFQXYkY2vl15GAlbzFLOamVhz8jGtyvbkS2izgwb6KYbmJGNUeYWah2QpZvqk3aCGdMoA0Ew4+BiodN9uLax2OrX67ZIxbaFV6/3e4vrO+1Obcamdy2tZtH2DBvIXDRDvVmoPVxbbNWDKCi5rjDEdd0giNx+b2Onu5TfzI1SGoKd3KtnLkotXM23bm17o5Xalppmp2HL/rK77IV6qh4yO+uLa+2cRq6WZgRZ5iK3l2PF7lqrkQZOCGmGssvWr8BYG0wWbjkqL27n6Q4XSzOBLN2Am+6+NeVKc931ehC4KuXINB03iJ76BD4VolQu9aY3Mu1IxCwj2LSlsW13ukF0baflBkIj08aoCbq39TMB72qThRvUV9vTsWxLhiA/My+lG7BFfwoXdTfqFD3+iBbq5wJxqg1WC5Si1s40+valgvlHP+nYJN15/dq7bPeigEiEZRqAUwiEqF4MDQTkupFYv3aTMlfPtlTv5LIuk45U6boDxHa/4dqAO6EDZcBQPwBW9Wu0EzwQNDauqXPWVaYpnH9s0C3L+nyt3bV7kjq1PYRDGy2gSEJ6CsxHXENJYK9fy601aeEMTc3DQGp4DRd1VgNXcIYULOeIbyD1oHxAiNmDfhHUr5OPHbnWDE1N2tJkFNe9arm5tVIguIoQIagQguGVcagQGDqWs3rtqHV1aPblhmfonNczva+2sF0PiEHISoH3FFmoE2ahMIKNtOtGq1eFsSsTI8hf8ldL2U5Ll/tyaSNykSrGaIWgiFWfhW/cRp6rcgsl94qxaVspuJjbwp5y0aUWdlsBakQ1jlMOqx8ARRO+uDKah3/BxqWM05bFaequiyStp5mFlzlyzXUJgTapTck4Hj3GLwBishkRCz4I+pfxXLssdzhNT2LIQl0qcMnoZG41QghSJEg4eWKJ58TJejrCtX5HucqNLplj2FYEUM87j9FRe72YqvbrAekvWMyIVzC1ePWnnBPsU+Ia2Ir6b2xcGKKdSPm2k9PCfbWHC8df7bqLQSDy5AEUEBG0h8OTEy8rMWPdUJomvYuSMRu/pktdXc8uskCi/MLx13bJtW1mD+EORhJkJ1ImQdpYj9V6gCjL6VK/M1mFdVmwr+DCS+RhJPd5wSD/QYNrBiWOdZkGHilJGa+wfm2cc8khMkgXNNfZCD2Vct6mZkfmse1OLDdrjXNJhZTJ6Ia12SwnuQUwc4OLmhVD3bliIhBXXVVT8jY1GyW5/4nTGOsR7n1MSNkxeAoWNGYI3wzradA9anOuPQmJi65cI+9UUjaHcVFBXQsoYtw4sIvGSDSewChRTTBWP4dWwQPp1idEUbUkk2NwHWm5atvnpzG2G2gSKwH4Dr2HrGL04jToH4uljUYxL+g/1z7PqFLDdOF6Tguhdz63fjsijRg9mAlIOhtpyRUnwuG5zKoKuTAz8fwhmL5CqSjntLABjh57vxsY4yHzDxKJcyTDG+EUPiIkcFDyYgFeOX/iS11/2sg3F1VraAeXxt7vu0YyTSKO8QYGozJGTbrSMzPM9WxypZgwTII95TzjZD/SOxrDQK8EECNoAecxKwi3gp4Isp51BRB6IVi4jRzVkB0/DubqpaN8TU070t6PjLfXAh4U5nTSNX1obnk8Gxn+APq8b7FtrzkQns5CRALyFfhl/EhaWbsj5zHO7UC7tcHh322woi6QFnkr5g02nzz9qQmqUVTO1QIEpNd89vxgkxModxfCIa0ZRipGGvo5j3HuBPb5PK7VqY02UoyYMTk4ORv6j5qcT6lnQ99gYLM777Dqx0dPssgTA+H4guBvDgPmGtqFOZua9ZKuZ9zCjbLpZlJWaVFuHrx4OYwtq3rMyjtagsZSymbPveTpyLFGo39ODrbOmU9YzR54lz0HrXHOgzPZLI2UBpXadjAeN9umNPFE8/RFPAwdx7LiV5sesSIVAjSWaCqL+8jKJPbPTpKBx7sEhIB+wY9SLDQ0nvKdcSIPy8jdkIVzfZcAgxqAql4zeVEdZpqmFlr+QBBJ4KIMgwDD9HHw2nes7GaF/qPXm64nTErCPBRGm72ku//U7FwW9qGZpGqzBocleGLp3XuD5I0v7cs0dRz/zYBR5thkjA0WyKde8nPsaBOd0H/5JCGmwRvCnM6ZrTWgZajnsXDBhYRBC5caTEFOjJJgjs+GMnjyznHClwnmEEUP4ElvZSH81c+ALVdOH+Lhu4MtDwONxur7EvbZtQZ8Ws7T1NSAim0sQuuYhUAR2rciDeC7Uexo81Q0/F8Gts0yiHS00Vb1VvNFNXWJDmL2P3x5kmB3bmRv9rwB9b3TAP/lamr2IwBipCf0OhHvZJBjUvGahz8OlWHKwux+9LaJ/IJcO8lY7+BliMFXWwn9t0nZg9RjYczucEjeacDbuZqabAChtAILNwKMHoZBPd9844eOgxhVCWXFBxhjnrCsxKntN//yEaKwAWu4e5h4Nu4LwCBfQhA7MM9g52pqHsBcNjio407CTfpfTo58pp0DtlZfbHrof0woMf6Wt7kXa5/IVTVew+FzbSL13tpKmMZPUar9l+uMk4w3lRbawnVtMmW9jIc3OD0bkfMdUDbD2nEyEKWyW86kVBaiXHbTlyJ7Q5S1DDbfVx2Fa3CQfjl8lxCaadIgK/sKVZ0IwJGrqVkPwGXR/lwqtb6gZBKYFd7WEytG2xyHEiq1sPr+1/JV8stvvspcykIgHP8oEVBosEPI3kl7mEyl/QhQWs7T1Ky6UPHclqx/LqcI+MxrHldD5XqloKZEHYihX71K/BEzDtlYxdPfS5C02d5TspEatSBb7DxNjWpp1MZdQUxogtRrvvZDQKWOIIsj6H6FIP/qPESLrepZAr6EOiqwTJHP7TxnnGRnmnBokFVYl7Iq8XoUopKgoqXpRocE1VXvgP0Ot18XfPKKTmdn9AWiyAkK1KKS05/+4AwMk1iJJw9qm73BEz+0sB0BIrWYpRx4kKroDzLV8BIsKz8afdkklFKSgMOhfuX4RkHNZTZh2mH45P4Gp1boEM2bocTYkBnn7SdLTSORk9P+9m3iwT6Vb80WQGkXdKa2UPOUaR8WcOXC5Cwmc0yQ6cjy6oEWM9iCe3BNLBVIWI7/kzYRwofjE0EBzXHGiZylYf0LNsxYnrzNoyq02cgTmHAUKsxMXeyAaiFZMes4mtELqfivm8QuRgcv4C7PGSdZSwMwoBkLbETSJEzeDAlPDgsNxhEiwknFwDJCkjMOa2/UO+HuIZUnCBpmjXqWo6lZC1gzibTFJp7Kh9CqWRhGHR8WVqITIy0tbjFr9RjCAebp32hv00Oq42UL7c5zGu1GyWBo6psB+puPYsolSh+HW+UQEMEa8AERq0lPFFgok+li/pumZ+NMAXIBYNbOdfhpsUTI4P86gl7zjW+UMc4ceEdJBrXciCy8QUxDvsAQygX8g7JZBxGvGlOTD3JeJgt9l8LHKhDsoXwYAyCxmWEZRCE00GnYTuWDKiDaRGZKGf2m+HSsWABS0ydTl/z1gDKZ+hgsvF7ydsS7K6JCHKuz/pRHhQBM6cvyEeJIIdRBzCYMbMpFposC1rSnfulxCRt2Cshv+Ub5SZUHB3nTGrPHgUU4bDnHmK0BpyDTdfFe4pEGVA4xkUQ03Vmm8ow26Nqor4eC623+E5OTKWMYY7D85DTE2hViIs5IvO7DArLuvx5wXscI4pNgKq5ZaPCeT7Byr588qbJKQDnG+m7sVyCwDoOkkWNEMCwLiZg0GOIviQcOZvN8EIP01pgmEx9EOJ4wOxl1S7uZkdlhgq7ofCkhAhhzEpHLq0gYWswVrG4gwh15mID1WJSA+DDV4ZmNEu/XcIOAC7HF5mW4vkgXjhNWVnZ3VyrIlxaLMctWy1mpOLvO/DxVFoA0Ql/FMz7aRDo1KVBbO83Bi4WWO56DRoEdnPiYbQ5DmEM4rFiP7374cPfzfAWxx5oWWjJcvv9DuuCfvy+v8OCR76gW+VtjFRqOZ2hrpxkFL9UF3xDjUmVw8iVmWCNsOujz5Y+wrY/LCEjWziCOnT/0ch/uz7OmFDBNUEm55mSAnRUvFaTp9RNxqUTd9lhFzO7Kp8MxQPEcyx6WP9PGPi8jn5rVIXsW38XlPtxfYaCEJZgX41c0u4g68aCWrm9hLeDdGjGOdtvWc98hLEGTyThm5T7f2qcVRpfIuVKWH7Pl7i7D56zgWATsbIYZOw8ieioZwfXH+UtYJMBR2Jdmm9x6O6IqxnUBjFX+4Fv7YxmWPZexFWO3v88TDztGVmuYpn0N08gc62evrx/DBTgTx6ZGnlXFg0chJhN1pFi0ndAxN1cx8osCac3/bSz3RwVKDiQ3a4XSV8P3TRs0Yq0N2jnFl7rnFl1ajw3ItAcPR7yHxnzBlyZI79z5kabjqJpkK1T+Yyz35zyDAxjIIBIfbQkq9ggwgNZUc6Y7AVolqEpozw3+oqEvRxLSwriF90KsbXgn1a78YCx3d54MQ2cQnTrhywOa4DQqmbR3qmF+p8GRAHaqB08f7WMYQkOVauctNBQncJ+3kMoEo17ceHxKhyM5U6iX0x1DzCa8WfSoa0v/soETUQZRHTybaKFR9yF5J8QQqxA1QwTY4a9wJggildqSKU/B3I9sgiYZJ581X8WwUwwIxjJ7nIRSi4JD+TvZQoInOVK5xj/ZsmEkMDYWEGLag6QbASuDBIXs1pSH+1ijTCmmTJwQQ+xpjOSahFLKO6RVfGOYnWiFOjFCtacfAd9Z6AU2Tqux3iZ9GJyFHJ/OGGAnxZBhjUXHmcw05uQV7cSxqi+aHiN2rlXQm/rQTK0V4SaAVdWWTx+FJogISkqrCShlQ1oIpDPRQiw7kNTUNVnW6GmCoIIQqgAErRzfBZ7bCaIALONzGKcvQ4oZlDcezckxpBTDFm5iHlosgHST643eJWwUh8/cKFrL982nue5GwAZgsOHBoxCyf9zb6sXEajEGULnixDxkdIQ+07HPYgjwBFhlGdjN/4X8WoBJCD1bauFZTC7mDodaPpFLjeZHB2ViPaTeADsDuE/zEHkPO28xRcM9QdR3LPnw3tZcqsnDYX4GoyfHkDEvOGZyxWe0heFWrzMutRnLSL1yf9lCSRubG5j/Sce/r2Ia4jA6x5J+EZeyDHSuYBrTUlhJ1kOAEjw0ZrzKk/pGA2U39DQOczOWLl2+LuhLiRUh9BcwjTGxg71b+or1NDhPNsMXSJXIM6Owwkpbm++rEAYaOrEMmhxDxr1Y4y7mUscyZ/iVd8LTsWGAuIkLdfVK5DZl5eBfOMTXZhojcueCngbbaFr6op4G4YA0Kn0TPjrgowE7Rzc6SbolBD5U/sOYUf+5gj+5LzUGF7DuBT0NBZyX/HRocbRFfZoOYynvlyuZrEeuEpwfkWN8C3yMaYK4nTi2oCUdVPyCztuhVMVAZqsN32+hs0slqVN0E1fIXVhdlNLD4Urz3QiJgForqucTUcq7MQDepBjixhzcAbhHHX+Sbq4rnRavvCbBtWROS8vVXerWc590oC4M8Rqem8VwKBK8apgzVmoWg3083iyFTZhTSYfzWqmbMBDlQaQdqOZLyTTiPqVPuGuuWEGoEffLVSfNRNGcHCNWeR8fJTpPbuuKo0t9dR6YyE48R2ez4RMyQ+VPQ/FlPpOI/Ur23ryxg7/niTep8UWn+CcDDaIZLoRxuewEuvQPTnwaBZHfkRviT3y1T3BGA0EPgm/MCH+AGWGEBpZC+dJvwmxRdFsXjV2ow9C66TNVEHdMczar/7ECpjMK0S/D8AMZeH8FgcmLCvhk9O9Ef2Vo1qsAXiI7kR4jJs9GFvRgrJCTJfNo4sd5VjBNpkzvVu4BoD98qgAk2YIskqMn0BjfWghTKUHPdDhiXEOAdbCGVO4/TsPz4fH9CurL+JfK/0rl76xk3P3osOlg1iM5UBn1gfzbDaG+rJKtDgKzcjGuW/awslyJ40plxcAaaU899fxyxaosV0KEAK/zwDX6oIUsFte/9lgeWdRfSHAPY6gP1H1g6402G+NY7GXYnfowJNbihEQYSUvFP/IwfobRWS51ebV0dC54ybsqGccSkrctxBv8hu6AVoUXSdYmsdmr9OYf6xDOcEGh68lOpAcvpxgd9LdR/lmVJNNYQlq4AKKYBc+kG8cZPdMh/AoX39ajKa+pWjeo3pRcVDgwSJRVDMfQcoKNDjoJfURzp/5BSdWpy67Hc0NSK6vWydvMDuZjuABQjokzwKmRpSZXUmcENjlkvl5ST+enPHrbGM0ETx4+rY4dFzSIEJMQCiVaa5rCluRkzLnHGr1SJ5oI93Z5FGRdTaKmOB0y3CHvcH0NHBr5xkEMNGukJVZMedwQjqV9nWuLz/XULKqXvB2i3+l4A8WRXjlZaa+sYKqlhTJksWfswqoKGu4fb6kpi6+QhEoW+uq8Pi/ZG1E6gVJG3QPmcFY+PX78aUUHcP73x5/1YVMkHiQlI36y1j/XDemNDOivJx2hvjFUPvgx5ixvxNDM0PmP+syabIHldOR7P3RoAU0/VH4Y9v2nibrYwnQnH84o3UAeI/YGh6OQKpcF/TelED6G99IuNe3hZAh/TJ9jG8rXoKYPy031n011TmJp9lm1aaStTnzzto7jkELAjvxhYYNwZHMyf+xWVsKVyv20J/9cYSMNs+0j89I7baAtSl/7924eystipoR6PAxZZdBZZwRQPVtJg3jnw+d7u/ezUe8HJ2QVFKIPfgIrLWe4t6lmMEs5vro1o7RLMoxe8zCOsb4h5RgVQYVz/h6Ndu86K7QYUotDrtLW+0ebalo0xyHe2aWr6CbNxZcjg/aRJxxITGX7yu5/lI0fPs+HCETGxAQDDW7/rbrcifhGP6u1X5eH3uzBwV7VMMoyY4HPw8q9vz9+/vj7jxWkTCwvRC7YlofV9+qgdsqi3+hXtWotfWHI5K3PSv5YVDhYw/lKpTIfkhW8FMIT7a149FqWCSG+Yh0cl7nVhhxKecmJH1MZxPoPfxgabhaa6bD2BanJ8R8dNrMvOwn3loe8V8iDSJ7F6DVPv/hY3ogajd5EW4BAxGoBiKV64cT+u009NzrD9chvRLp99aX2cvI+jB0zUESnvDKSWVgPsTgACPyz40QPl1a/+Q9q1VYDOTb1mk/2fDwmZejLWNWiQEM1NPGaPcTV9wcDOVxyxSy/znFjsh2p6l/ePBn5htakN88/LAfUvmC6po+x/0VdESMd0F903dKvLQurkS6NyRvLN769ziwgxPJMBZgCiGN/73hTyDPWg+8jgEraPX0lxa2DN7vDmAcPKoBuexDFrDmjcW883HstrxOVUugVF7r+2rKwU5fDYk80D96cVWOiESN0mJmW2adLCUfx0S/NgYyfG/Ru4PD1zUptXQTq4F7z4Je9kbzgl8PIBhBLnQ7/z8K3++wwGajLvQT9h9/jb4PW1spB1o17KeccPj/z/dhyCI44aKC65wBgw5FfPXrdTFQT6kb17e/RvkyW1vqRvFijJwaJ/fyV5VdjOJcG8491PdmrcDQcvnx30kzKagavFPW+5x96u7Ow3dM/BGGXt5oH/3rxz+5oOIpDsBJm6mWTGsejYfzot59+PcguC5l1oG5gz3Ki4deRuezHdEr61NtBc+v01/++3XvpjKrD6mgUSxmN0riN4t2zV0//OjxoNsv6MpmBaO10vrX+15KF9mIUBfAFv3IzSbZOnxz/9d+nz45e/fzzz6/+/ezFyevjw9P0g4HQZz+4QUOsf8+/JXlO2uutRqR/eUZeLKA82EqSZDOTJGkOyuoTOYtWCqKg938SPS5znQcbLSF/eA3Oqve87N/z6DQ5txRF9d5ae4Yfl/u2slBrr622+iIIsl/Po5/Pc91S9lZd/nTerL8Q+O1lrrbf3V7bWOypX0C07Xq/1Vtd33nY7XzPPxddSCGFFFJIIYUUUkghhRRSSCGFFFJIIYUUUkghhRRSSCGFFFJIIYUUUkghhfw/yv8Axt++nTJEAWAAAAAASUVORK5CYII="
+              alt="Collab.Land Logo"
+              width={24}
+              height={24}
+            />
+            <CardTitle className="text-xl font-bold">Collab.Land</CardTitle>
+          </div>
+          <Button variant="ghost" size="icon" onClick={onClose}>
+            <X className="h-4 w-4" />
+          </Button>
+        </CardHeader>
+        <CardContent>
+          <h2 className="mb-4 text-xl font-semibold">Oops, that an error</h2>
+          <p className="mb-4">
+            To connect your wallets, please start at the{" "}
+            <Button variant="link" className="h-auto p-0 text-blue-500">
+              Lets go
+            </Button>{" "}
+            flow in your communitys Discord server or use the Collab.Land invite link for your communitys Telegram channel
+          </p>
+          <p>
+            To invite the Collab.Land bot to your community, start{" "}
+            <Link href="/invite" passHref>
+              <Button variant="link" className="h-auto p-0 text-blue-500">
+                here
+              </Button>
+            </Link>
+          </p>
+        </CardContent>
+      </Card>
+    </div>
+  )
+}
